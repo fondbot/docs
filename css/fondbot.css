@@ -38,6 +38,10 @@
     color: #3273dc;
 }
 
+.markdown-section {
+    max-width: 1200px;
+}
+
 .markdown-section a {
     color: #3273dc;
 }

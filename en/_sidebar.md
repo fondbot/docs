@@ -1,6 +1,7 @@
 - Getting started
   - [Introduction](/)
   - [Installation](/installation)
+  - [Configuration](/configuration)
 
 - Core Concepts
   - [Intents](/intents)
