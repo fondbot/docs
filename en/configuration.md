@@ -27,6 +27,7 @@ Define your own adapters in `src/Providers/LogServiceProvider.php`.
 As your bot become popular there will be many incoming requests. 
 In order to send messages asynchronously you can use queues. 
 By default `SyncAdapter` will be used and messages will be sent synchronously.
+Change adapter in `src/Providers/QueueServiceProvider.php`.
 
 ### Beanstalkd
 FondBot comes with [Beanstalkd](http://kr.github.io/beanstalkd/) adapter.
