@@ -4,7 +4,7 @@
 Intent is a command which is been executed upon activation.
 Upon running you can send messages, attachments and templates.
 
-In order to create dialog and process user replies you need to create [interaction](/interactions).
+In order to create dialog and process user replies you need to use [interactions](/interactions).
 
 ## Creating Intents
 
