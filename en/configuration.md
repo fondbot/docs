@@ -1,7 +1,7 @@
 # Configuration
 All configuration is done by service providers which you can find in `src/Providers` folder. 
 
-In order to keep sensitive and dynamic values you should use `.env` file which stands for environment configuration.
+In order to keep sensitive and dynamic data you should use `.env` file which stands for environment configuration.
 
 ## Application
 There is no need to change default application configuration, but you free to change it anyway in `src/Providers/AppServiceProvider.php`.
