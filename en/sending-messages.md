@@ -46,34 +46,28 @@ From the above example a message with `If you need an additional information typ
 ### Sending Templates
 FondBot supports sending templates. Pass template object in the second argument to `sendMessage` method:
 
-    $this->sendMessage(
-        'Should I send you a weather forecast every day?',
-        new Keyboard([
-            new Keyboard\ReplyButton('Yes, please.'),
-            new Keyboard\ReplyButton('No.'),
-        ])
-    );
+    $keyboard = (new Keyboard)
+        ->addButton(new Keyboard\ReplyButton('Yes, please.'))
+        ->addButton(new Keyboard\ReplyButton('No.'));
+
+    $this->sendMessage('Should I send you a weather forecast every day?', $keyboard);
 
 You can find out about supported templates in the [templates](/templates) section.
 
 ## Attachments
 Sending attachment is an ease:
 
-    $this->sendAttachment(
-        new Attachment(
-            Attachment::TYPE_IMAGE,
-            'https://fakeimg.pl/350x200/?text=FondBot'
-        )
-    );
+    $attachment = (new Attachment)
+        ->setPath('http://lorempixel.com/400/200/')
+        ->setType(Attachment::TYPE_IMAGE);
+        
+    $this->sendAttachment($attachment);
 
-Naturally, delay is also suppoted in attachment sending:
+Naturally, delay is also supported in attachment sending:
 
-
-    $this->sendAttachment(
-        new Attachment(
-            Attachment::TYPE_IMAGE,
-            'https://fakeimg.pl/350x200/?text=FondBot'
-        ),
-        3
-    );
+    $attachment = (new Attachment)
+        ->setPath('http://lorempixel.com/400/200/')
+        ->setType(Attachment::TYPE_IMAGE);
+        
+    $this->sendAttachment($attachment, 3);
 
