@@ -38,8 +38,20 @@ If you use Laravel your url will look like:
 
 ## Templates
 
-### Keyboard Buttons
+### Request Contact Button
+User can send his phone number. You can request it by sending `RequestContactButton` in keyboard.
 
-| Class                                                                    | Description                                                |
-|--------------------------------------------------------------------------|------------------------------------------------------------|
-| FondBot\Drivers\Telegram\Templates\Keyboard\Buttons\RequestContactButton | Use this button when you need to know user's phone number. |
+    $keyboard = (new Keyboard)
+        ->addButton(
+            (new RequestContactButton)->setLabel('Send my phone number.')
+        );
+
+    $this->sendMessage('What\'s your phone number? Our support team will call you back.', $keyboard);
+
+### Request Location Button
+User can send his current location. You can request it by sending `RequestLocationButton` in keyboard.
+
+    $keyboard = (new Keyboard)
+        ->addButton(
+            (new RequestLocationButton)->setLabel('Send my location.')
+    );

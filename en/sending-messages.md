@@ -47,8 +47,12 @@ From the above example a message with `If you need an additional information typ
 FondBot supports sending templates. Pass template object in the second argument to `sendMessage` method:
 
     $keyboard = (new Keyboard)
-        ->addButton(new Keyboard\ReplyButton('Yes, please.'))
-        ->addButton(new Keyboard\ReplyButton('No.'));
+        ->addButton(
+            (new Keyboard\ReplyButton)->setLabel('Yes, please.')
+        )
+        ->addButton(
+            (new Keyboard\ReplyButton)->setLabel('No.')
+        );
 
     $this->sendMessage('Should I send you a weather forecast every day?', $keyboard);
 
