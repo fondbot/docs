@@ -28,9 +28,9 @@ Define Facebook channel in `src/Providers/ChannelServiceProvider.php`:
 
 ### Webhook URL
 
-If you use Laravel your url will look like:
+You can find route URL for your channels by running:
 
-    https://<YOURDOMAIN>/fondbot/<YOUR-FACEBOOK-CHANNEL-NAME>
+    php bin/toolbelt channel:list
 
 ## Templates
 
