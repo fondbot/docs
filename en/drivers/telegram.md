@@ -32,9 +32,9 @@ Then, using curl tell Telegram which URL to use for sending updates from bot:
 
     curl -F “url=https://<YOURDOMAIN>/<WEBHOOKLOCATION>" https://api.telegram.org/bot<TOKEN-OBTAINED-FROM-TELEGRAM>/setWebhook    
 
-If you use Laravel your url will look like:
+You can find route URL for your channels by running:
 
-    https://<YOURDOMAIN>/fondbot/<YOUR-TELEGRAM-CHANNEL-NAME>
+    php bin/toolbelt channel:list
 
 ## Templates
 
