@@ -39,7 +39,6 @@ You can find route URL for your channels by running:
 ## Templates
 
 ### Request Contact Button
-User can send his phone number. You can request it by sending `RequestContactButton` in keyboard.
 
     $keyboard = (new Keyboard)
         ->addButton(
@@ -49,7 +48,6 @@ User can send his phone number. You can request it by sending `RequestContactBut
     $this->sendMessage('What\'s your phone number? Our support team will call you back.', $keyboard);
 
 ### Request Location Button
-User can send his current location. You can request it by sending `RequestLocationButton` in keyboard.
 
     $keyboard = (new Keyboard)
         ->addButton(
