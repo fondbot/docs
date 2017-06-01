@@ -12,3 +12,4 @@
 - Drivers
   - [Telegram](/drivers/telegram)
   - [Facebook](/drivers/facebook)
+  - [VK Communities](/drivers/vk-communities)
