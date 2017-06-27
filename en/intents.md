@@ -17,7 +17,7 @@ This command will generate `src/WeatherIntent.php` file which will contain the f
     
     declare(strict_types=1);
     
-    namespace App;
+    namespace Bot\Intents;
     
     use FondBot\Conversation\Activators\Activator;
     use FondBot\Conversation\Intent;
