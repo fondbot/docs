@@ -17,7 +17,7 @@ This command will generate `src/Interactions/AskCityInteraction.php` file which 
     
     declare(strict_types=1);
     
-    namespace App\Interactions;
+    namespace Bot\Interactions;
     
     use FondBot\Conversation\Interaction;
     use FondBot\Drivers\ReceivedMessage;

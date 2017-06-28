@@ -11,13 +11,13 @@ Create new intent by running toolbelt command:
 
     php bin/toolbelt make:intent Weather
 
-This command will generate `src/WeatherIntent.php` file which will contain the following class:
+This command will generate `src/Intents/WeatherIntent.php` file which will contain the following class:
 
     <?php
     
     declare(strict_types=1);
     
-    namespace App;
+    namespace Bot\Intents;
     
     use FondBot\Conversation\Activators\Activator;
     use FondBot\Conversation\Intent;
