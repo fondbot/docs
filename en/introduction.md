@@ -23,6 +23,8 @@ When there is a new major release, only the latest minor release of the previous
 
 No new functionality will be added to the old major releases. 
 
+Deprecated functionality is removed in the next major release.
+
 The major release which is under development lives in master. 
 
 ## Community
