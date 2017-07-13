@@ -56,7 +56,7 @@ FondBot supports sending templates. Pass template object in the second argument 
 
     $this->sendMessage('Should I send you a weather forecast every day?', $keyboard);
 
-You can find out about supported templates in the [templates](/templates) section.
+You can read more about templates in the [templates](/templates) section.
 
 ## Attachments
 Sending attachment is an ease:
