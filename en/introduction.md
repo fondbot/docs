@@ -21,13 +21,19 @@ Branches are created using the following pattern: [MAJOR].[MINOR]
 
 Release tags are never deleted. 
 
-When there is a new major release, only the latest minor release of the previous major release will receive bug & security fixes. Hence, if there are 1.0, 1.1, 1.2, 2.0 releases, 1.2 will receive bug & security patches, but 1.0 and 1.1 will not. 
+Each minor release makes the previous one unsupported.
+Unsupported releases do not receive bug & security fixes. 
 
-No new functionality will be added to the old major releases. 
+| Version | Receives fixes |
+|---------|----------------|
+| 1.0     | No             |
+| 1.1     | No             |
+| 1.2     | Yes            |
+| 2.0     | No             |
+| 2.1     | Yes            |
 
-Deprecated functionality is removed in the next major release.
-
-The major release which is under development lives in master. 
+Upcoming minor release branch is master.
+Upcoming major release branch is develop. 
 
 ## Community
 
