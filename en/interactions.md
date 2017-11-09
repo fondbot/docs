@@ -9,9 +9,9 @@ Bot can jump to interaction from [intent](/intents) by calling `jump` method.
 
 Create new interaction by running toolbelt command:
 
-    php bin/toolbelt make:interaction AskCity
+    php toolbelt make:interaction AskCity
 
-This command will generate `src/Interactions/AskCityInteraction.php` file which will contain the following class:
+This command will generate `app/Interactions/AskCityInteraction.php` file which will contain the following class:
    
     <?php
     

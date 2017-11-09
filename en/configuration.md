@@ -1,54 +1,79 @@
 # Configuration
-All configuration is done by service providers which you can find in `src/Providers` folder. 
 
-In order to keep sensitive and dynamic data you should use `.env` file which stands for environment configuration.
-
-## Application
-There is no need to change default application configuration, but you free to change it anyway in `src/Providers/AppServiceProvider.php`.
-
-## Cache
-By default FondBot will utilize filesystem for cache. You can change adapter in `src/Providers/CacheServiceProvider.php`.
+As mentioned before, FondBot is powered by the Laravel framework and if you are familiar with this framework you will not have problems in installing and customizing your configuration.
+But if you are a newcomer, go through the [official Laravel documentation](https://laravel.com/docs/5.5/configuration). 
+Also, you might be interested in [Cache](https://laravel.com/docs/5.5/cache), [Queues](https://laravel.com/docs/5.5/queues) and [Database](https://laravel.com/docs/5.5/eloquent) sections.
 
 ## Channels
-These are connections to different platforms (Telegram, Facebook Messenger, etc.). Define them in `src/Providers/ChannelServiceProvider.php`.
 
-## Filesystem
-FondBot uses League's [Flysystem](https://flysystem.thephpleague.com) package to work with filesystem. 
+Channel is a connection to the messenger service. There is a `app/Providers/ChannelServiceProvider.php` where you define all your channels.
 
-You can define Dropbox, Amazon S3, FTP and many other adapters in `src/Providers/FilesystemServiceProvider.php`.
+Here is an example where we define channel called `telegram` which will use `telegram` as a driver, the other options stand for driver options.
 
-## Intents
-Intents are one of the core modules of FondBot. Define intents for your bot in `src/Providers/IntentServiceProvider.php`.
+```php
+<?php
 
-## Logging
-FondBot uses [Monolog](https://seldaek.github.io/monolog/) to work with logs.
-Define your own adapters in `src/Providers/LogServiceProvider.php`.
+declare(strict_types=1);
 
-## Queues
-As your bot become popular there will be many incoming requests. 
-In order to send messages asynchronously you can use queues. 
-By default `SyncAdapter` will be used and messages will be sent synchronously.
-Change adapter in `src/Providers/QueueServiceProvider.php`.
+namespace Bot\Providers;
 
-### Beanstalkd
-FondBot comes with [Beanstalkd](http://kr.github.io/beanstalkd/) adapter.
-If you want to use Beanstalkd, firstly install `pda/pheanstalk` package:
+use FondBot\Foundation\Providers\ChannelServiceProvider as ServiceProvider;
 
-    composer require pda/pheanstalk:^3.1
-    
-Then, run queue worker:
+class ChannelServiceProvider extends ServiceProvider
+{
+    /**
+     * Define bot channels.
+     *
+     * @return array
+     */
+    protected function channels(): array
+    {
+        return [
+            'telegram' => [
+                'driver' => 'telegram',
+                'token' => env('TELEGRAM_TOKEN'),
+            ],
+        ];
+    }
+}
+```
 
-    php bin/toolbelt queue:worker
-    
-### Supervisor
-Use the following supervisor configuration in order to run worker in background:
+To get a list of all register channels execute the `channel:list` toolbelt command:
 
-    [program:fondbot-worker]
-    process_name=%(program_name)s_%(process_num)02d
-    command=php /var/www/fondbot/bin/toolbelt queue:worker
-    autostart=true
-    autorestart=true
-    user=www-data
-    numprocs=4
-    redirect_stderr=true
-    stdout_logfile=/var/www/fondbot/resources/logs/worker.log
+```bash
+php toolbelt channel:list
+```
+
+### Protecting Channel Webhooks
+
+You are likely want to protect your channel webhook routes from unauthorized access. Just add `webhook-secret` to your driver options with a random string and it will be appended to the URL.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Bot\Providers;
+
+use FondBot\Foundation\Providers\ChannelServiceProvider as ServiceProvider;
+
+class ChannelServiceProvider extends ServiceProvider
+{
+    /**
+     * Define bot channels.
+     *
+     * @return array
+     */
+    protected function channels(): array
+    {
+        return [
+            'telegram' => [
+                'driver' => 'telegram',
+                'token' => env('TELEGRAM_TOKEN'),
+                'webhook-secret' => 'some-random-string',
+            ],
+        ];
+    }
+}
+```
+

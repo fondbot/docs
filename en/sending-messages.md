@@ -9,11 +9,11 @@ In order to send message with text with or without template within intent or int
 
     declare(strict_types=1);
 
-    namespace App;
+    namespace Bot\Intents;
 
     use FondBot\Conversation\Activators\Activator;
     use FondBot\Conversation\Intent;
-    use FondBot\Drivers\ReceivedMessage;
+    use FondBot\Events\MessageReceived;
 
     class WeatherIntent extends Intent
     {

@@ -8,7 +8,7 @@ You can find all related information in the [official guide](https://core.telegr
 
 In your project root run the following command:
 
-    php bin/toolbelt driver:install telegram
+    php toolbelt driver:install telegram
 
 ### Configuration    
 
@@ -34,7 +34,7 @@ Then, using curl tell Telegram which URL to use for sending updates from bot:
 
 You can find route URL for your channels by running:
 
-    php bin/toolbelt channel:list
+    php toolbelt channel:list
 
 ## Templates
 

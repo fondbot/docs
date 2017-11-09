@@ -2,9 +2,11 @@
 
 ## Overview
 
-FondBot is a framework for building chat bots.
+FondBot is a framework for building chat bots. 
+As the main goal of this project is to provide an elegant and flexible architecture to develop and maintain chatbots, FondBot is powered by the Laravel framework which gives a developer access to many ready and solid components.
+Cache, Database, Queue are the main ones required to develop modern chatbots.
 
-The main goal of this project is to provide elegant and flexible architecture to develop and maintain chatbot projects from small to the big ones.
+In this documentation we will not cover Laravel related topics, so if you need assistance with Laravel do throught it's official [documentation](https://laravel.com/docs/5.5).
 
 ## Features
 

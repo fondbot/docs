@@ -9,98 +9,98 @@ In order to create dialog and process user replies you need to use [interactions
 ## Creating Intents
 Create new intent by running toolbelt command:
 
-    php bin/toolbelt make:intent Weather
+    php toolbelt make:intent WeatherIntent
 
-This command will generate `src/Intents/WeatherIntent.php` file which will contain the following class:
+This command will create `app/Intents/WeatherIntent.php` file which will contain the following class:
 
-    <?php
-    
-    declare(strict_types=1);
-    
-    namespace Bot\Intents;
-    
-    use FondBot\Conversation\Activators\Activator;
-    use FondBot\Conversation\Intent;
-    use FondBot\Drivers\ReceivedMessage;
-    use GuzzleHttp\Client;
-    
-    class WeatherIntent extends Intent
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Bot\Intents;
+
+use FondBot\Conversation\Activator;
+use FondBot\Conversation\Intent;
+use FondBot\Events\MessageReceived;
+
+class WeatherIntent extends Intent
+{
+    /**
+     * Intent activators.
+     *
+     * @return \FondBot\Contracts\Conversation\Activator[]
+     */
+    public function activators(): array
     {
-        /**
-         * Intent activators.
-         *
-         * @return Activator[]
-         */
-        public function activators(): array
-        {
-            return [
-                $this->exact('/weather'),
-                $this->exact('Tell me the weather for today'),
-            ];
-        }
-    
-        public function run(ReceivedMessage $message): void
-        {
-            // Fetch weather data
-            $guzzle = new Client;
-            $response = $guzzle->get('http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b1b15e88fa797225412429c1c50c122a1');
-            $response = json_decode($response->getBody()->getContents());
-            
-            // Send result to user
-            $this->sendMessage($response->weather->description);
-        }
+        return [
+            Activator::exact('/weather'),
+        ];
     }
 
-
-## Activators
-From the above example, if user sends `/weather` or `Tell me the weather for today` then `WeatherIntent` will be activated. 
-
-### Available Activators
-
-#### Exact Activator
-The Exact activator works when message text and activator's value are equivalent. You can also pass a second argument to set if strings must be case sensitive.
-
-| Class                                 | Helper method  |
-|---------------------------------------|----------------|
-| FondBot\Conversation\Activators\Exact | $this->exact() |
-
-#### Contains Activator
-The Contains activator works when message text contains one or more values.
-
-| Class                                    | Helper method     |
-|------------------------------------------|-------------------|
-| FondBot\Conversation\Activators\Contains | $this->contains() |
-
-#### Pattern Activator
-The Pattern activator checks if message text is matched by a regular expression.
-
-| Class                                   | Helper method    |
-|-----------------------------------------|------------------|
-| FondBot\Conversation\Activators\Pattern | $this->pattern() |
-
-#### In Array Activator
-The In Array activator checks if message text matches one of the values from the array.
-
-| Class                                   | Helper method    |
-|-----------------------------------------|------------------|
-| FondBot\Conversation\Activators\InArray | $this->inArray() |
-
-#### With Attachment Activator
-The With Attachment activator works if message contains attachment. You can also set which attachment type should exactly be.
-
-| Class                                          | Helper method           |
-|------------------------------------------------|-------------------------|
-| FondBot\Conversation\Activators\WithAttachment | $this->withAttachment() |
+    public function run(MessageReceived $message): void
+    {
+        // Send reply to user, jump to interaction or do something else...
+    }
+}
+```
 
 ## Handling Intent
 When one of the intent activator matches, `run` method will be executed by framework.
 Here you can do some tasks like fetching data from external API and then sending result to the user.
 Go to the [sending messages](/sending-messages) section to learn more about message templates.
 
-Also, if you want to create dialog with user with processing his reply you need to run [interaction](/interactions) within the intent:
+If you want to create dialog with user and process his reply you need to make a transition to an [interaction](/interactions) from your intent:
 
-    public function run(ReceivedMessage $message): void
+    public function run(MessageReceived $message): void
     {
-        $this->jump(Interactions\AskCityInteraction::class);
+        Interactions\AskCityInteraction::jump();
     }
+
+## Activators
+From the above example, if user sends `/weather` then `WeatherIntent` will be activated. 
+
+### Available Activators
+
+#### exact:value
+
+Received message text must match the given value.
+
+#### contains:foo,bar,...
+
+Received message text contains one or more values using [str_contains](https://laravel.com/docs/5.5/helpers#method-str-contains) helper.
+Since this activator requires an array of values you may use `Activator` class in order to create activator instance.
+
+```php
+Activator::contains(['weather in', 'is it raining in'])
+```
+
+#### regex:pattern
+
+Received message text is matched by a regular expression.
+
+#### in_array:foo,bar,...
+
+Received message text is one of given values using `in_array` function. 
+The In Array activator checks if message text matches one of the values from the array.
+
+Since this activator requires an array of values you may use `Activator` class in order to create activator instance.
+
+```php
+Activator::inArray(['first', 'second'])
+```
+
+#### attachment
+
+Received message must contain any attachment or attachment of given type.
+
+```php
+Activator::attachment() // any attachment
+Activator::attachment()->image() // only image attachment
+```
+
+#### payload:value
+
+Received message payload data must match the given value.
+
 
