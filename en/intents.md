@@ -1,4 +1,4 @@
-# Intent
+# Intents
 
 ## Introduction
 Intent is a command which is been executed upon activation.
@@ -57,6 +57,21 @@ If you want to create dialog with user and process his reply you need to make a 
         Interactions\AskCityInteraction::jump();
     }
 
+## Injecting Dependencies
+
+FondBot loves Laravel's approach to the DI, so you can inject any dependencies through intent constructor as you do it in Laravel.
+ 
+```php
+class WeatherIntent extends Intent
+{
+    public function __construct(WeatherApi $api) 
+    {
+        $this->api = $api;
+    {   
+    ...
+}
+```
+
 ## Activators
 From the above example, if user sends `/weather` then `WeatherIntent` will be activated. 
 
@@ -79,7 +94,7 @@ Activator::contains(['weather in', 'is it raining in'])
 
 Received message text is matched by a regular expression.
 
-#### in_array:foo,bar,...
+#### in:foo,bar,...
 
 Received message text is one of given values using `in_array` function. 
 The In Array activator checks if message text matches one of the values from the array.
@@ -87,7 +102,7 @@ The In Array activator checks if message text matches one of the values from the
 Since this activator requires an array of values you may use `Activator` class in order to create activator instance.
 
 ```php
-Activator::inArray(['first', 'second'])
+Activator::in(['first', 'second'])
 ```
 
 #### attachment
