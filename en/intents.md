@@ -34,7 +34,7 @@ class WeatherIntent extends Intent
     public function activators(): array
     {
         return [
-            Activator::exact('/weather'),
+            'exact:/weather',
         ];
     }
 
